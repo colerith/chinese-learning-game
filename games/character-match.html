@@ -240,19 +240,24 @@
             </div>
         </div>
     </main>
+    <!-- ================== 标准脚本加载区 START (games/ 目录版本) ================== -->
+    <!-- (请确保这是 </body> 前唯一的脚本区域) -->
 
-    <script src="../js/script.js"></script>
-    <script src="../js/game-scripts/character-match.js"></script>
-    <!-- ▼▼▼ 统一的脚本加载区（games/ 文件夹内的版本） ▼▼▼ -->
     <!-- 1. 引入Firebase官方SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firestore-compat.js"></script>
 
-    <!-- 2. 引入我们刚创建的Firebase初始化文件 (注意路径) -->
+    <!-- 2. 引入Firebase初始化文件 (注意../路径) -->
     <script src="../js/firebase-init.js"></script>
 
-    <!-- 3. 引入全局认证状态检查脚本 (注意路径) -->
+    <!-- 3. 引入全局认证脚本 (注意../路径) -->
     <script src="../js/auth.js"></script>
+    
+    <!-- 4. 引入此游戏专属的脚本 (注意../路径) -->
+    <script src="../js/game-scripts/character-match.js"></script>
+
+    
+    <!-- =================== 标准脚本加载区 END =================== -->
 </body>
 </html>

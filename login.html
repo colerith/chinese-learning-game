@@ -100,17 +100,25 @@
             </form>
         </div>
     </main>
-    <!-- ▼▼▼ 统一的脚本加载区（请用此结构替换所有旧脚本） ▼▼▼ -->
+   <!-- ================== 标准脚本加载区 START ================== -->
+    <!-- (请确保这是 </body> 前唯一的脚本区域) -->
+
     <!-- 1. 引入Firebase官方SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firestore-compat.js"></script>
 
-    <!-- 2. 引入我们刚创建的Firebase初始化文件 -->
+    <!-- 2. 引入Firebase初始化文件 (它会创建全局 auth 和 db 变量) -->
     <script src="js/firebase-init.js"></script>
 
-    <!-- 3. 引入全局认证状态检查脚本 -->
+    <!-- 3. 引入全局认证脚本 (它依赖于 firebase-init.js) -->
     <script src="js/auth.js"></script>
-    <script src="js/script.js"></script>
+    
+    <!-- 4. 引入页面专属脚本 (根据需要取消注释) -->
+    <script src="js/script.js"></script>        <!-- (仅 login.html 需要) -->
+    <!-- <script src="js/score-board.js"></script> -->   <!-- (仅 score-board.html 需要) -->
+    <!-- <script src="js/profile.js"></script> -->       <!-- (仅 profile.html 需要) -->
+    
+    <!-- =================== 标准脚本加载区 END =================== -->
 </body>
 </html>
