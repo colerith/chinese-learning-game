@@ -158,9 +158,10 @@
                 <div class="chinese">汉语学习小游戏</div>
                 <div class="english">Chinese Learning Games</div>
             </div>
+           <!-- ================== 标准导航栏结构 START ================== -->
             <nav>
                 <ul class="nav-list">
-                    <li id="auth-status-link">
+                    <li>
                         <a href="index.html" class="bilingual">
                             <span class="chinese">首页</span>
                             <span class="english">Home</span>
@@ -178,14 +179,11 @@
                             <span class="english">Scores</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="login.html" class="btn btn-secondary bilingual">
-                            <span class="chinese">登录/注册</span>
-                            <span class="english">Login/Register</span>
-                        </a>
-                    </li>
+                    <!-- 这个li是专门为auth.js准备的容器，它自己是空的 -->
+                    <li id="auth-status-link"></li> 
                 </ul>
             </nav>
+            <!-- =================== 标准导航栏结构 END =================== -->
         </div>
     </header>
 

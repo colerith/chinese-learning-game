@@ -38,13 +38,32 @@
     <header>
         <div class="container header-content">
             <div class="logo bilingual"><span>汉语学习小游戏</span><span>Chinese Learning Games</span></div>
+           <!-- ================== 标准导航栏结构 START ================== -->
             <nav>
                 <ul class="nav-list">
-                    <li><a href="index.html" class="bilingual"><span>首页</span><span>Home</span></a></li>
-                    <li><a href="game-select.html" class="bilingual"><span>游戏选择</span><span>Games</span></a></li>
-                    <li id="auth-status-link"></li>
+                    <li>
+                        <a href="index.html" class="bilingual">
+                            <span class="chinese">首页</span>
+                            <span class="english">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="game-select.html" class="bilingual">
+                            <span class="chinese">游戏选择</span>
+                            <span class="english">Games</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="score-board.html" class="bilingual">
+                            <span class="chinese">成绩排行</span>
+                            <span class="english">Scores</span>
+                        </a>
+                    </li>
+                    <!-- 这个li是专门为auth.js准备的容器，它自己是空的 -->
+                    <li id="auth-status-link"></li> 
                 </ul>
             </nav>
+            <!-- =================== 标准导航栏结构 END =================== -->
         </div>
     </header>
 
