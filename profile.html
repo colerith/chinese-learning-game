@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        header { background-color: #2d3748; color: white; }
+        .logo .bilingual .chinese, .logo .bilingual .english { color: white; }
+        .logo .bilingual .english { color: rgba(255, 255, 255, 0.85); }
+        .nav-list a { text-decoration: none; }
+        .nav-list a .chinese, .nav-list a .english { color: white; }
+        .nav-list a .english { color: rgba(255, 255, 255, 0.85); }
+        .nav-list a:hover { background-color: rgba(255, 255, 255, 0.1); }
+        a.btn { text-decoration: none; }
+        body { background-color: #f5f7fa; }
+        .container { max-width: 1000px; }
+        .bilingual { display: flex; flex-direction: column; gap: 4px; }
+        .chinese { font-size: 1.15em; font-weight: 500; color: #2d3748; }
+        .english { font-size: 0.9em; color: #4a5568; font-style: normal; }
+        .profile-header { display: flex; align-items: center; gap: 25px; padding: 20px; background-color: #f0f7ff; border-radius: 12px; margin-bottom: 30px; }
+        .avatar { font-size: 5em; color: #4299e1; background-color: white; border-radius: 50%; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .user-details .bilingual { margin-bottom: 10px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-card { background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.07); text-align: center; }
+        .stat-card .icon { font-size: 2.5em; color: #4299e1; margin-bottom: 10px; }
+        .stat-card .value { font-size: 1.8em; font-weight: 600; color: #2d3748; }
+        .activity-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .activity-table th, .activity-table td { padding: 15px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        .activity-table th .bilingual { margin: 0; }
+        .activity-table tbody tr:nth-child(even) { background-color: #f8fafc; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo bilingual"><span>汉语学习小游戏</span><span>Chinese Learning Games</span></div>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="index.html" class="bilingual"><span>首页</span><span>Home</span></a></li>
+                    <li><a href="game-select.html" class="bilingual"><span>游戏选择</span><span>Games</span></a></li>
+                    <li><a href="score-board.html" class="bilingual"><span>成绩排行</span><span>Scores</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: 30px;">
+        <div class="profile-header">
+            <div class="avatar"><i class="fas fa-user-circle"></i></div>
+            <div class="user-details">
+                <div class="bilingual">
+                    <h2 class="chinese" id="user-name">加载中...</h2>
+                    <h3 class="english">Loading...</h3>
+                </div>
+                <div class="bilingual">
+                    <span class="chinese" id="student-id-cn">学号: ...</span>
+                    <span class="english" id="student-id-en">Student ID: ...</span>
+                </div>
+            </div>
+            <button id="logout-btn" class="btn btn-secondary bilingual" style="margin-left: auto;">
+                <span>退出登录</span><span>Logout</span>
+            </button>
+        </div>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="icon"><i class="fas fa-gamepad"></i></div>
+                <div class="value" id="games-played">0</div>
+                <div class="bilingual"><span>总游戏次数</span><span>Games Played</span></div>
+            </div>
+            <div class="stat-card">
+                <div class="icon"><i class="fas fa-star"></i></div>
+                <div class="value" id="avg-score">0</div>
+                <div class="bilingual"><span>平均分</span><span>Average Score</span></div>
+            </div>
+        </section>
+
+        <section class="card" style="padding: 20px 30px;">
+            <div class="bilingual"><h2 class="chinese">最近游戏记录</h2><h3 class="english">Recent Game History</h3></div>
+            <table class="activity-table">
+                <thead>
+                    <tr>
+                        <th><div class="bilingual"><span>游戏类型</span><span>Game Type</span></div></th>
+                        <th><div class="bilingual"><span>得分</span><span>Score</span></div></th>
+                        <th><div class="bilingual"><span>用时(秒)</span><span>Time (sec)</span></div></th>
+                        <th><div class="bilingual"><span>日期</span><span>Date</span></div></th>
+                    </tr>
+                </thead>
+                <tbody id="history-body">
+                    <!-- 真实数据将由JS填充 -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    
+    <!-- Firebase 和 Auth 脚本 -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firestore-compat.js"></script>
+    <script>
+        const firebaseConfig = { /* 你的配置 */ };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+    </script>
+    <!-- 这里不需要 auth.js 因为个人中心页本身就是登录后状态 -->
+    
+    <!-- 此页面专属的JS -->
+    <script src="js/profile.js"></script>
+</body>
+</html>

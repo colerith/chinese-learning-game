@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏选择 - Game Selection</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- NEW HEADER STYLES --- */
+        header {
+            background-color: #2d3748; /* Dark Blue Background */
+            color: white;
+        }
+        .logo .chinese, .logo .english {
+            color: white;
+        }
+        .logo .english {
+            color: rgba(255, 255, 255, 0.85);
+        }
+        .nav-list a {
+            text-decoration: none; /* Remove underline */
+        }
+        .nav-list a .chinese, .nav-list a .english {
+            color: white;
+        }
+        .nav-list a .english {
+            color: rgba(255, 255, 255, 0.85);
+        }
+        .nav-list a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        a.btn {
+            text-decoration: none; /* Remove underline from links styled as buttons */
+        }
+        /* --- END NEW HEADER STYLES --- */
+
+        /* 游戏选择页特有样式 */
+        .page-intro {
+            margin-bottom: 40px;
+            padding: 25px;
+            background-color: #f0f7ff;
+            border-radius: 12px;
+        }
+        .game-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .game-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .game-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+        .game-icon-container {
+            background-color: #e3f2fd; /* 更柔和的蓝色背景 */
+            padding: 35px 20px;
+            text-align: center;
+        }
+        .game-icon {
+            font-size: 4em;
+            color: #4299e1;
+        }
+        .game-info {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; /* 让内容区域占满剩余空间 */
+        }
+        .game-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            color: #64748b;
+            font-size: 0.9em;
+        }
+        .game-difficulty {
+            display: flex;
+            gap: 4px;
+        }
+        .difficulty-star {
+            color: #cbd5e0; /* 未填充星星颜色 */
+        }
+        .difficulty-star.filled {
+            color: #f59e0b; /* 填充星星颜色 */
+        }
+        .game-action {
+            margin-top: auto; /* 将按钮推到底部 */
+            padding-top: 20px;
+        }
+        /* 统一双语样式 */
+        .bilingual {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .chinese {
+            font-size: 1.15em;
+            font-weight: 500;
+        }
+        .english {
+            font-size: 0.9em;
+            font-style: normal;
+            letter-spacing: 0.2px;
+        }
+        h3.chinese { font-size: 1.4em; }
+        h4.english { font-size: 1.05em; color: #334155; }
+        .game-desc.chinese { font-size: 1em; color: #334155; line-height: 1.6; }
+        .game-desc.english { font-size: 0.85em; color: #64748b; line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo bilingual">
+                <span class="chinese">汉语学习小游戏</span>
+                <span class="english">Chinese Learning Games</span>
+            </div>
+            <nav>
+                <ul class="nav-list">
+                    <li id="auth-status-link">
+                        <a href="index.html" class="bilingual">
+                            <span class="chinese">首页</span>
+                            <span class="english">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="score-board.html" class="bilingual">
+                            <span class="chinese">成绩排行</span>
+                            <span class="english">Score Rankings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="profile.html" class="btn btn-secondary bilingual">
+                            <span class="chinese">个人中心</span>
+                            <span class="english">Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="page-intro">
+            <div class="bilingual">
+                <h1 class="chinese">选择游戏类型</h1>
+                <h2 class="english">Select Game Type</h2>
+            </div>
+            <div class="bilingual" style="margin-top: 15px;">
+                <p class="chinese">请选择想参与的复习游戏，每款游戏都将随机生成题目，帮助你巩固《汉语教程》1-15课的知识点。</p>
+                <p class="english">Please select a review game. Each game will randomly generate questions to help you consolidate knowledge from "Chinese Course" Lessons 1-15.</p>
+            </div>
+        </section>
+
+        <div class="game-list">
+            <!-- 汉字连连看 -->
+            <div class="game-card">
+                <div class="game-icon-container">
+                    <i class="fas fa-link game-icon"></i>
+                </div>
+                <div class="game-info">
+                    <div class="bilingual">
+                        <h3 class="game-title chinese">汉字连连看</h3>
+                        <h4 class="english">Character Matching</h4>
+                    </div>
+                    
+                    <div class="game-meta">
+                        <div class="bilingual">
+                            <span class="chinese">难度：初级</span>
+                            <span class="english">Difficulty: Easy</span>
+                        </div>
+                        <div class="game-difficulty">
+                            <i class="fas fa-star difficulty-star filled"></i>
+                            <i class="fas fa-star difficulty-star"></i>
+                            <i class="fas fa-star difficulty-star"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="bilingual">
+                        <p class="game-desc chinese">连接汉字或词语与对应的英文释义，巩固认知和理解能力。</p>
+                        <p class="english">Connect Chinese characters/words with their English meanings to strengthen recognition skills.</p>
+                    </div>
+                    
+                    <div class="game-action">
+                        <a href="games/character-match.html" class="btn btn-primary bilingual" style="width:100%; text-decoration: none;">
+                            <span class="chinese">开始游戏</span>
+                            <span class="english">Start Game</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 拼音填空 -->
+            <div class="game-card">
+                <div class="game-icon-container">
+                    <i class="fas fa-pen-fancy game-icon"></i>
+                </div>
+                <div class="game-info">
+                    <div class="bilingual">
+                        <h3 class="game-title chinese">拼音填空</h3>
+                        <h4 class="english">Pinyin Filling</h4>
+                    </div>
+                    
+                    <div class="game-meta">
+                        <div class="bilingual">
+                            <span class="chinese">难度：中级</span>
+                            <span class="english">Difficulty: Medium</span>
+                        </div>
+                        <div class="game-difficulty">
+                            <i class="fas fa-star difficulty-star filled"></i>
+                            <i class="fas fa-star difficulty-star filled"></i>
+                            <i class="fas fa-star difficulty-star"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="bilingual">
+                        <p class="game-desc chinese">为缺失拼音的词语选择正确的拼音，强化汉字读音的准确性。</p>
+                        <p class="english">Choose the correct pinyin for words to enhance pronunciation accuracy.</p>
+                    </div>
+                    
+                    <div class="game-action">
+                        <a href="games/pinyin-fill.html" class="btn btn-primary bilingual" style="width:100%; text-decoration: none;">
+                            <span class="chinese">开始游戏</span>
+                            <span class="english">Start Game</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- 对话选择游戏卡片 -->
+            <div class="game-card">
+                <div class="game-icon-container">
+                    <i class="fas fa-comments game-icon"></i>
+                </div>
+                <div class="game-info">
+                    <div class="bilingual">
+                        <h3 class="game-title chinese">对话选择</h3>
+                        <h4 class="english">Dialogue Choice</h4>
+                    </div>
+                    
+                    <div class="game-meta">
+                        <div class="bilingual">
+                            <span class="chinese">难度：中级</span>
+                            <span class="english">Difficulty: Medium</span>
+                        </div>
+                        <div class="game-difficulty">
+                            <i class="fas fa-star difficulty-star filled"></i>
+                            <i class="fas fa-star difficulty-star filled"></i>
+                            <i class="fas fa-star difficulty-star"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="bilingual">
+                        <p class="game-desc chinese">根据对话情景选择最合适的回答，考察你的语言运用能力。</p>
+                        <p class="english">Choose the best response for the dialogue to test your practical language skills.</p>
+                    </div>
+                    
+                    <div class="game-action">
+                        <a href="games/dialogue-choice.html" class="btn btn-primary bilingual" style="width:100%; text-decoration: none;">
+                            <span class="chinese">开始游戏</span>
+                            <span class="english">Start Game</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- 语法选择游戏卡片 -->
+            <div class="game-card">
+                <div class="game-icon-container">
+                    <i class="fas fa-spell-check game-icon"></i>
+                </div>
+                <div class="game-info">
+                    <div class="bilingual">
+                        <h3 class="game-title chinese">语法选择</h3>
+                        <h4 class="english">Grammar Quiz</h4>
+                    </div>
+                    
+                    <div class="game-meta">
+                        <div class="bilingual">
+                            <span class="chinese">难度：中高级</span>
+                            <span class="english">Difficulty: Medium-Hard</span>
+                        </div>
+                        <div class="game-difficulty">
+                            <i class="fas fa-star difficulty-star filled"></i>
+                            <i class="fas fa-star difficulty-star filled"></i>
+                            <i class="fas fa-star difficulty-star"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="bilingual">
+                        <p class="game-desc chinese">通过选词填空，重点考察量词、助词和常用副词的用法。</p>
+                        <p class="english">Test your knowledge of measure words, particles, and common adverbs by filling in the blanks.</p>
+                    </div>
+                    
+                    <div class="game-action">
+                        <a href="games/grammar-quiz.html" class="btn btn-primary bilingual" style="width:100%; text-decoration: none;">
+                            <span class="chinese">开始游戏</span>
+                            <span class="english">Start Game</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firestore-compat.js"></script>
+</body>
+</html>

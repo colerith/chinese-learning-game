@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汉字连连看 - Chinese Character Matching</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- NEW HEADER STYLES --- */
+        header {
+            background-color: #2d3748; /* Dark Blue Background */
+            color: white;
+        }
+        .logo .bilingual .chinese, .logo .bilingual .english {
+            color: white;
+        }
+        .logo .bilingual .english {
+            color: rgba(255, 255, 255, 0.85);
+        }
+        .nav-list a {
+            text-decoration: none; /* Remove underline */
+        }
+        .nav-list a .chinese, .nav-list a .english {
+            color: white;
+        }
+        .nav-list a .english {
+            color: rgba(255, 255, 255, 0.85);
+        }
+        .nav-list a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        a.btn {
+            text-decoration: none; /* Remove underline from links styled as buttons */
+        }
+        /* --- END NEW HEADER STYLES --- */
+        
+        /* 游戏页全局样式 */
+        body {
+            background-color: #f5f7fa;
+        }
+        .game-wrapper {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .main-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            padding: 30px;
+        }
+
+        /* 双语优化 */
+        .bilingual {
+            display: flex; flex-direction: column; gap: 4px; margin-bottom: 15px;
+        }
+        .chinese {
+            font-size: 1.1em; font-weight: 500; color: #2d3748;
+        }
+        .english {
+            font-size: 0.9em; color: #4a5568; font-style: normal; letter-spacing: 0.2px;
+        }
+        h2.chinese { font-size: 1.6em; }
+        h3.english { font-size: 1.2em; color: #334155; }
+
+        .game-description {
+            padding-bottom: 20px; border-bottom: 1px solid #e2e8f0; margin-bottom: 20px;
+        }
+        
+        /* 计分板 */
+        .score-panel {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .score-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+        .score-item {
+            display: flex; align-items: baseline; gap: 8px;
+            padding: 10px; background-color: white; border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .score-item .label {
+            font-weight: 500; color: #334155;
+        }
+        .score-item .value {
+            font-weight: 600; font-size: 1.2em; color: #4299e1;
+        }
+        
+        /* 进度条 */
+        .progress-container {
+            width: 100%; height: 10px; background-color: #e2e8f0;
+            border-radius: 5px; margin: 20px 0; overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%; background-color: #4299e1; width: 0%;
+            transition: width 0.4s ease-in-out;
+        }
+        
+        /* 游戏面板 */
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px; background-color: #edf2f7; padding: 20px; border-radius: 8px;
+        }
+        .card {
+            background-color: white; border-radius: 8px; padding: 10px; text-align: center;
+            cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.2s ease; height: 90px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1em; font-weight: 500;
+            border: 2px solid transparent;
+        }
+        .card:hover {
+            transform: translateY(-4px); box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .card.selected {
+            background-color: #e6f7ff; border-color: #1890ff; transform: scale(1.05);
+        }
+        .card.matched {
+            background-color: #f6ffed; border-color: #52c41a;
+            animation: matched 0.5s ease; opacity: 0.7; cursor: default;
+        }
+        @keyframes matched {
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* 反馈与按钮 */
+        .feedback {
+            margin: 25px 0; padding: 15px; border-radius: 6px;
+            background-color: #f0f7ff; border-left: 5px solid #4299e1;
+        }
+        .button-group {
+            display: flex; justify-content: center; gap: 20px; margin-top: 25px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-card { padding: 20px; }
+            .game-board { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+            .card { height: 75px; font-size: 1em; }
+        }
+        @media (max-width: 480px) {
+            .game-board { grid-template-columns: repeat(2, 1fr); }
+            .button-group { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo bilingual" style="gap: 10px;">
+                <div>
+                    <span class="chinese" style="font-size: 1.2em; color:#f5f7fa58">汉字连连看</span>
+                    <span class="english" style="font-size: 0.9em;">Character Matching</span>
+                </div>
+            </div>
+            <nav>
+                <ul class="nav-list">
+                    <li id="auth-status-link">
+                        <a href="../game-select.html" class="bilingual">
+                            <span class="chinese">返回选择页</span>
+                            <span class="english">Back to Selection</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../profile.html" class="btn btn-secondary bilingual">
+                            <span class="chinese">个人中心</span>
+                            <span class="english">Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="game-wrapper">
+        <div class="main-card">
+            <div class="bilingual">
+                <h2 class="chinese">汉字连连看</h2>
+                <h3 class="english">Chinese Character Matching</h3>
+            </div>
+            
+            <div class="game-description">
+                <div class="bilingual" style="margin-bottom: 0;">
+                    <p class="chinese">点击汉字/词语，再点击对应的英文释义进行配对。完成所有配对即可获胜！</p>
+                    <p class="english">Click a Chinese character/word, then click its corresponding English meaning to match. Complete all pairs to win!</p>
+                </div>
+            </div>
+            
+            <div class="score-panel">
+                <div class="score-items">
+                    <div class="score-item">
+                        <span class="label bilingual"><span class="chinese">得分</span><span class="english">Score</span></span>
+                        <span class="value" id="current-score">0</span> / 200
+                    </div>
+                    <div class="score-item">
+                        <span class="label bilingual"><span class="chinese">已完成</span><span class="english">Completed</span></span>
+                        <span class="value" id="completed-count">0</span> / 10
+                    </div>
+                    <div class="score-item">
+                        <span class="label bilingual"><span class="chinese">用时</span><span class="english">Time</span></span>
+                        <span class="value" id="game-time">0s</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <div class="game-board" id="game-board">
+                <!-- 游戏卡片将由JS动态生成 -->
+            </div>
+
+            <div class="feedback" id="feedback">
+                <div class="bilingual" style="margin-bottom: 0;">
+                    <p class="chinese">请开始游戏，选择第一张卡片。</p>
+                    <p class="english">Start the game by selecting the first card.</p>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" id="restart-btn">
+                    <div class="bilingual">
+                        <span class="chinese">重新开始</span>
+                        <span class="english">Restart Game</span>
+                    </div>
+                </button>
+                <button class="btn btn-secondary" id="hint-btn">
+                    <div class="bilingual">
+                        <span class="chinese">获取提示</span>
+                        <span class="english">Get a Hint</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/game-scripts/character-match.js"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firestore-compat.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录/注册 - 汉语学习游戏</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* --- NEW HEADER STYLES --- */
+        header {
+            background-color: #2d3748; /* Dark Blue Background */
+            color: white;
+        }
+        .logo .bilingual .chinese, .logo .bilingual .english { /* Specific targeting for this page's simpler header */
+            color: white;
+        }
+        .logo .bilingual .english {
+            color: rgba(255, 255, 255, 0.85);
+        }
+        .nav-list a {
+            text-decoration: none; /* Remove underline */
+            color: white;
+        }
+        .nav-list a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        a.btn {
+            text-decoration: none; /* Remove underline from links styled as buttons */
+        }
+        /* --- END NEW HEADER STYLES --- */
+
+        /* 统一双语样式 */
+        .bilingual { display: flex; flex-direction: column; gap: 4px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo bilingual">
+                <span class="chinese">汉语学习小游戏</span>
+                <span class="english">Chinese Learning Games</span>
+            </div>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="game-select.html">游戏选择</a></li>
+                    <li><a href="score-board.html">成绩排行</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="card" style="max-width: 500px; margin: 60px auto; padding: 30px;">
+            <div class="bilingual" style="text-align: center; margin-bottom: 30px;">
+                <h2 class="chinese">用户登录 / 注册</h2>
+                <h3 class="english">User Login / Register</h3>
+            </div>
+            <form id="userForm">
+                <div class="form-group">
+                    <label class="form-label bilingual" for="studentId">
+                        <span class="chinese">学号</span>
+                        <span class="english">Student ID</span>
+                    </label>
+                    <input type="text" id="studentId" class="form-control" required placeholder="请输入您的学号 / Please enter your Student ID">
+                </div>
+                <div class="form-group">
+                    <label class="form-label bilingual" for="userName">
+                        <span class="chinese">姓名</span>
+                        <span class="english">Name</span>
+                    </label>
+                    <input type="text" id="userName" class="form-control" required placeholder="请输入您的姓名 / Please enter your Name">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+                    <div class="bilingual">
+                        <span class="chinese">登录或注册</span>
+                        <span class="english">Login / Register</span>
+                    </div>
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firestore-compat.js"></script>
+</body>
+</html>

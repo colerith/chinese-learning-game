@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成绩排行 - Score Rankings</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        header { background-color: #2d3748; color: white; }
+        .logo .bilingual .chinese, .logo .bilingual .english { color: white; }
+        .logo .bilingual .english { color: rgba(255, 255, 255, 0.85); }
+        .nav-list a { text-decoration: none; }
+        .nav-list a .chinese, .nav-list a .english { color: white; }
+        .nav-list a .english { color: rgba(255, 255, 255, 0.85); }
+        .nav-list a:hover { background-color: rgba(255, 255, 255, 0.1); }
+        a.btn { text-decoration: none; }
+        body { background-color: #f5f7fa; }
+        .container { max-width: 1000px; }
+        .bilingual { display: flex; flex-direction: column; gap: 4px; }
+        .chinese { font-size: 1.15em; font-weight: 500; color: #2d3748; }
+        .english { font-size: 0.9em; color: #4a5568; font-style: normal; }
+        .filter-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; }
+        .filter-tabs .btn { font-size: 14px; padding: 8px 15px; }
+        .ranking-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .ranking-table th, .ranking-table td { padding: 15px; text-align: left; border-bottom: 1px solid #e2e8f0; vertical-align: middle; }
+        .ranking-table th .bilingual, .ranking-table td .bilingual { margin: 0; }
+        .ranking-table tbody tr:nth-child(even) { background-color: #f8fafc; }
+        .rank-cell { font-size: 1.2em; font-weight: bold; text-align: center !important; width: 60px; }
+        .rank-gold { color: #d4af37; }
+        .rank-silver { color: #c0c0c0; }
+        .rank-bronze { color: #cd7f32; }
+        .score-cell { font-weight: 600; color: #4299e1; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo bilingual"><span>汉语学习小游戏</span><span>Chinese Learning Games</span></div>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="index.html" class="bilingual"><span>首页</span><span>Home</span></a></li>
+                    <li><a href="game-select.html" class="bilingual"><span>游戏选择</span><span>Games</span></a></li>
+                    <li id="auth-status-link"></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: 30px;">
+        <div class="card" style="padding: 20px 30px;">
+            <div class="bilingual" style="margin-bottom: 20px;">
+                <h2 class="chinese">成绩排行榜</h2>
+                <h3 class="english">Score Rankings</h3>
+            </div>
+
+            <div class="filter-tabs" id="filter-tabs">
+                <button class="btn btn-primary bilingual" data-filter="all"><span>总排行</span><span>Overall</span></button>
+                <button class="btn btn-secondary bilingual" data-filter="语法选择"><span>语法选择</span><span>Grammar</span></button>
+                <button class="btn btn-secondary bilingual" data-filter="对话选择"><span>对话选择</span><span>Dialogue</span></button>
+                <button class="btn btn-secondary bilingual" data-filter="拼音填空"><span>拼音填空</span><span>Pinyin</span></button>
+                <button class="btn btn-secondary bilingual" data-filter="汉字连连看"><span>汉字连连看</span><span>Matching</span></button>
+            </div>
+
+            <table class="ranking-table">
+                <thead>
+                    <tr>
+                        <th class="rank-cell">#</th>
+                        <th><div class="bilingual"><span>玩家</span><span>Player</span></div></th>
+                        <th><div class="bilingual"><span>游戏类型</span><span>Game Type</span></div></th>
+                        <th><div class="bilingual"><span>得分</span><span>Score</span></div></th>
+                        <th><div class="bilingual"><span>日期</span><span>Date</span></div></th>
+                    </tr>
+                </thead>
+                <tbody id="ranking-body">
+                    <!-- 真实数据将由JS填充 -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Firebase 和 Auth 脚本 -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firestore-compat.js"></script>
+    <script>
+        const firebaseConfig = { /* 你的配置 */ };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+    </script>
+    <script src="js/auth.js"></script>
+    
+    <!-- 此页面专属的JS -->
+    <script src="js/score-board.js"></script>
+</body>
+</html>

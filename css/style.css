@@ -1,0 +1,182 @@
+/* 基础样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microsoft YaHei", sans-serif;
+}
+
+body {
+    background-color: #f5fafe;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 头部样式 */
+header {
+background-color: #2d3748; /* Dark Blue Background */
+color: white;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+}
+
+.nav-list li {
+    margin-left: 30px;
+}
+
+.nav-list a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: opacity 0.3s;
+}
+
+.nav-list a:hover {
+    opacity: 0.8;
+}
+
+/* 按钮样式 */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4299e1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #3182ce;
+}
+
+.btn-secondary {
+    background-color: #9f7aea;
+}
+
+.btn-secondary:hover {
+    background-color: #805ad5;
+}
+
+/* 卡片样式 */
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+/* 表单样式 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* 游戏卡片样式 */
+.game-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.game-card {
+    transition: transform 0.3s;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+}
+
+.game-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.game-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #2d3748;
+}
+
+.game-desc {
+    color: #718096;
+    margin-bottom: 15px;
+}
+
+/* 成绩表格样式 */
+.score-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.score-table th, .score-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.score-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+/* 响应式样式 */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-list {
+        margin-top: 10px;
+    }
+
+    .nav-list li {
+        margin: 0 10px;
+    }
+
+    .game-list {
+        grid-template-columns: 1fr;
+    }
+}
