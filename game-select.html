@@ -318,20 +318,22 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firestore-compat.js"></script>
     <script>
         const firebaseConfig = {
-          apiKey: "AIzaSyBSWjQ-6EBh4jiIqAP1R3EsfGVtZyJ80ug",
-          authDomain: "chinese-learning-game.firebaseapp.com",
-          projectId: "chinese-learning-game",
-          storageBucket: "chinese-learning-game.firebasestorage.app",
-          messagingSenderId: "469409253035",
-          appId: "1:469409253035:web:626f5ddf41ce62406dd9ee",
-          measurementId: "G-V8DXNJDR41"
+        apiKey: "AIzaSyBSWjQ-6EBh4jiIqAP1R3EsfGVtZyJ80ug",
+        authDomain: "chinese-learning-game.firebaseapp.com",
+        projectId: "chinese-learning-game",
+        storageBucket: "chinese-learning-game.firebasestorage.app",
+        messagingSenderId: "469409253035",
+        appId: "1:469409253035:web:626f5ddf41ce62406dd9ee",
+        measurementId: "G-V8DXNJDR41"
         };
-        
+
         // 初始化 Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
     </script>
+    <script src="js/auth.js"></script>
+    <!-- 此页面专属的JS -->
+    <script src="js/score-board.js"></script>
 </body>
-
 </html>
