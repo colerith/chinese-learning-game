@@ -150,27 +150,16 @@
     </main>
 
     <script src="../js/game-scripts/dialogue-choice.js"></script>
+    <!-- ▼▼▼ 统一的脚本加载区（games/ 文件夹内的版本） ▼▼▼ -->
+    <!-- 1. 引入Firebase官方SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firestore-compat.js"></script>
-    <script>
-        const firebaseConfig = {
-        apiKey: "AIzaSyBSWjQ-6EBh4jiIqAP1R3EsfGVtZyJ80ug",
-        authDomain: "chinese-learning-game.firebaseapp.com",
-        projectId: "chinese-learning-game",
-        storageBucket: "chinese-learning-game.firebasestorage.app",
-        messagingSenderId: "469409253035",
-        appId: "1:469409253035:web:626f5ddf41ce62406dd9ee",
-        measurementId: "G-V8DXNJDR41"
-        };
 
-        // 初始化 Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-    </script>
-    <script src="js/auth.js"></script>
-    <!-- 此页面专属的JS -->
-    <script src="js/score-board.js"></script>
+    <!-- 2. 引入我们刚创建的Firebase初始化文件 (注意路径) -->
+    <script src="../js/firebase-init.js"></script>
+
+    <!-- 3. 引入全局认证状态检查脚本 (注意路径) -->
+    <script src="../js/auth.js"></script>
 </body>
 </html>
