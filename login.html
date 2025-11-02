@@ -100,7 +100,7 @@
             </form>
         </div>
     </main>
-   <!-- ================== 标准脚本加载区 START ================== -->
+    <!-- ================== 标准脚本加载区 START ================== -->
     <!-- (请确保这是 </body> 前唯一的脚本区域) -->
 
     <!-- 1. 引入Firebase官方SDK -->
@@ -108,16 +108,14 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firestore-compat.js"></script>
 
-    <!-- 2. 引入Firebase初始化文件 (它会创建全局 auth 和 db 变量) -->
+    <!-- 2. 引入你的Firebase初始化文件 (它会创建全局的 auth 和 db 变量) -->
     <script src="js/firebase-init.js"></script>
 
-    <!-- 3. 引入全局认证脚本 (它依赖于 firebase-init.js) -->
+    <!-- 3. 引入全局认证脚本 (虽然登录页本身不需要动态改变右上角，但为了统一，加上也无妨) -->
     <script src="js/auth.js"></script>
     
-    <!-- 4. 引入页面专属脚本 (根据需要取消注释) -->
-    <script src="js/script.js"></script>        <!-- (仅 login.html 需要) -->
-    <!-- <script src="js/score-board.js"></script> -->   <!-- (仅 score-board.html 需要) -->
-    <!-- <script src="js/profile.js"></script> -->       <!-- (仅 profile.html 需要) -->
+    <!-- 4. 引入处理登录/注册逻辑的脚本 (这个页面必须有！) -->
+    <script src="js/script.js"></script>
     
     <!-- =================== 标准脚本加载区 END =================== -->
 </body>
